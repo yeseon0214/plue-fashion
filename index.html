@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PLUE - PLUS UNIQUE</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">PLUE</div>
+                <nav class="nav-menu">
+                    <a href="#home" class="nav-link">HOME</a>
+                    <a href="#about" class="nav-link">ABOUT</a>
+                    <a href="#products" class="nav-link">PRODUCTS</a>
+                    <a href="#models" class="nav-link">MODELS</a>
+                    <a href="#benefits" class="nav-link">PURCHASE BENEFITS</a>
+                    <a href="#order" class="nav-link">ORDER</a>
+                </nav>
+                <div class="auth-buttons">
+                    <button class="btn-login" id="loginBtn">로그인</button>
+                    <button class="btn-signup" id="signupBtn">회원가입</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="hero-symbol">◆</div>
+            <h1 class="hero-title">PLUE</h1>
+            <p class="hero-subtitle">PLUS UNIQUE</p>
+            <p class="hero-tagline">Add Your Uniqueness</p>
+            <button class="btn-shop" onclick="scrollToSection('#products')">SHOP NOW</button>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <h2 class="section-title">ABOUT PLUE</h2>
+            <div class="about-content">
+                <p>PLUE는 PLUS UNIQUE의 약자로, '개성을 더하다'라는 의미를 담고 있습니다.</p>
+                <p>패션을 통해 자신만의 개성과 스타일을 자유롭게 표현할 수 있도록 다양한 제품을 선보이는 브랜드입니다.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products" id="products">
+        <div class="container">
+            <h2 class="section-title">PRODUCTS</h2>
+            <div class="products-grid" id="productsGrid">
+                <!-- 동적으로 생성됨 -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Models Section -->
+    <section class="models" id="models">
+        <div class="container">
+            <h2 class="section-title">MODELS</h2>
+            <div class="models-grid">
+                <div class="model-card fade-in">
+                    <div class="model-image">
+                        <div class="placeholder">PROFILE</div>
+                    </div>
+                    <h3 class="model-name">한여름</h3>
+                    <p class="model-title">Model Candidate</p>
+                </div>
+                <div class="model-card fade-in">
+                    <div class="model-image">
+                        <div class="placeholder">PROFILE</div>
+                    </div>
+                    <h3 class="model-name">온리예</h3>
+                    <p class="model-title">Model Candidate</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="benefits" id="benefits">
+        <div class="container">
+            <h2 class="section-title">PURCHASE BENEFITS</h2>
+            <div class="benefits-grid">
+                <div class="benefit-card fade-in">
+                    <h3>일반 포토카드</h3>
+                    <p class="benefit-info">총 6종</p>
+                    <p class="benefit-info">2종 랜덤 증정</p>
+                </div>
+                <div class="benefit-card fade-in">
+                    <h3>사인 포토카드</h3>
+                    <p class="benefit-info">총 4종</p>
+                    <p class="benefit-info">1종 랜덤 증정</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Order Section -->
+    <section class="order" id="order">
+        <div class="container">
+            <h2 class="section-title">ORDER</h2>
+            <form class="order-form" id="orderForm">
+                <div class="form-group">
+                    <label for="phone">연락망</label>
+                    <input type="text" id="phone" placeholder="010-0000-0000" required>
+                </div>
+                <div class="form-group">
+                    <label for="product">제품 선택</label>
+                    <select id="product" required>
+                        <option value="">선택하세요</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="quantity">수량</label>
+                    <input type="number" id="quantity" min="1" value="1" required>
+                </div>
+                <button type="submit" class="btn-order">ORDER REQUEST</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <h3>PLUE</h3>
+                <p>PLUS UNIQUE</p>
+                <p class="copyright">© 2026 PLUE. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('loginModal')">&times;</span>
+            <h2>로그인</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginName">이름</label>
+                    <input type="text" id="loginName" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">비밀번호</label>
+                    <input type="password" id="loginPassword" required>
+                </div>
+                <button type="submit" class="btn-submit">로그인</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div class="modal" id="signupModal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('signupModal')">&times;</span>
+            <h2>회원가입</h2>
+            <form id="signupForm">
+                <div class="form-group">
+                    <label for="signupName">이름</label>
+                    <input type="text" id="signupName" required>
+                </div>
+                <div class="form-group">
+                    <label for="communication">소통망</label>
+                    <input type="text" id="communication" placeholder="SNS, Email 등" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupPassword">비밀번호</label>
+                    <input type="password" id="signupPassword" required>
+                </div>
+                <button type="submit" class="btn-submit">회원가입</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- User Menu -->
+    <div class="user-menu" id="userMenu" style="display:none;">
+        <a href="pages/mypage.html" class="user-menu-link">마이페이지</a>
+        <button class="user-menu-link" onclick="logout()">로그아웃</button>
+    </div>
+
+    <script src="js/storage.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/products.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

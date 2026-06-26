@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - PLUE</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <style>
+        .admin-container {
+            max-width: 1200px;
+            margin: 120px auto 60px;
+            padding: 0 20px;
+        }
+        .admin-nav {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 40px;
+            border-bottom: 2px solid #000;
+        }
+        .admin-nav-btn {
+            padding: 15px 20px;
+            border: none;
+            background-color: transparent;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+        .admin-nav-btn.active {
+            border-bottom-color: #000;
+        }
+        .admin-section {
+            display: none;
+        }
+        .admin-section.active {
+            display: block;
+        }
+        .admin-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 40px;
+        }
+        .admin-table th,
+        .admin-table td {
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+        }
+        .admin-table th {
+            background-color: #f5f5f5;
+            font-weight: 600;
+        }
+        .admin-form {
+            background-color: #f5f5f5;
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+        .btn-delete {
+            padding: 6px 12px;
+            background-color: #ff4444;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-size: 12px;
+        }
+        .btn-delete:hover {
+            background-color: #cc0000;
+        }
+        .btn-add {
+            padding: 10px 30px;
+            background-color: #000;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        .btn-add:hover {
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">PLUE ADMIN</div>
+                <div class="auth-buttons">
+                    <button class="btn-login" onclick="adminLogout()">로그아웃</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="admin-container">
+        <h1 style="font-size: 36px; margin-bottom: 40px;">관리자 대시보드</h1>
+
+        <div class="admin-nav">
+            <button class="admin-nav-btn active" onclick="switchAdmin('users')">회원 관리</button>
+            <button class="admin-nav-btn" onclick="switchAdmin('orders')">주문 관리</button>
+            <button class="admin-nav-btn" onclick="switchAdmin('products')">제품 관리</button>
+            <button class="admin-nav-btn" onclick="switchAdmin('models')">모델 관리</button>
+        </div>
+
+        <!-- 회원 관리 -->
+        <div class="admin-section active" id="usersSection">
+            <h2 style="font-size: 24px; margin-bottom: 30px;">회원 목록</h2>
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>이름</th>
+                        <th>소통망</th>
+                        <th>가입일</th>
+                        <th>작업</th>
+                    </tr>
+                </thead>
+                <tbody id="usersBody">
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 주문 관리 -->
+        <div class="admin-section" id="ordersSection">
+            <h2 style="font-size: 24px; margin-bottom: 30px;">주문 내역</h2>
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>주문자</th>
+                        <th>제품</th>
+                        <th>수량</th>
+                        <th>금액</th>
+                        <th>날짜</th>
+                        <th>작업</th>
+                    </tr>
+                </thead>
+                <tbody id="ordersBody">
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 제품 관리 -->
+        <div class="admin-section" id="productsSection">
+            <h2 style="font-size: 24px; margin-bottom: 30px;">제품 관리</h2>
+            <button class="btn-add" onclick="showProductForm()">+ 제품 추가</button>
+
+            <form class="admin-form" id="productForm" style="display: none;">
+                <h3 style="margin-bottom: 20px;">제품 정보</h3>
+                <div class="form-group">
+                    <label>제품명</label>
+                    <input type="text" id="productName" required>
+                </div>
+                <div class="form-group">
+                    <label>카테고리</label>
+                    <select id="productCategory" required>
+                        <option value="">선택하세요</option>
+                        <option value="Shoes">Shoes</option>
+                        <option value="Clothing">Clothing</option>
+                        <option value="Caps">Caps</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>설명</label>
+                    <input type="text" id="productDescription" required>
+                </div>
+                <div class="form-group">
+                    <label>가격</label>
+                    <input type="number" id="productPrice" required>
+                </div>
+                <button type="submit" class="btn-add">저장</button>
+                <button type="button" class="btn-add" onclick="document.getElementById('productForm').style.display='none'" style="background-color: #666;">취소</button>
+            </form>
+
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>제품명</th>
+                        <th>카테고리</th>
+                        <th>설명</th>
+                        <th>가격</th>
+                        <th>작업</th>
+                    </tr>
+                </thead>
+                <tbody id="productsBody">
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 모델 관리 -->
+        <div class="admin-section" id="modelsSection">
+            <h2 style="font-size: 24px; margin-bottom: 30px;">모델 관리</h2>
+            <button class="btn-add" onclick="showModelForm()">+ 모델 추가</button>
+
+            <form class="admin-form" id="modelForm" style="display: none;">
+                <h3 style="margin-bottom: 20px;">모델 정보</h3>
+                <div class="form-group">
+                    <label>모델명</label>
+                    <input type="text" id="modelName" required>
+                </div>
+                <div class="form-group">
+                    <label>타이틀</label>
+                    <input type="text" id="modelTitle" value="Model Candidate" required>
+                </div>
+                <button type="submit" class="btn-add">저장</button>
+                <button type="button" class="btn-add" onclick="document.getElementById('modelForm').style.display='none'" style="background-color: #666;">취소</button>
+            </form>
+
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>모델명</th>
+                        <th>타이틀</th>
+                        <th>작업</th>
+                    </tr>
+                </thead>
+                <tbody id="modelsBody">
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <h3>PLUE</h3>
+                <p>PLUS UNIQUE</p>
+                <p class="copyright">© 2026 PLUE. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/storage.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const currentUser = Storage.getCurrentUser();
+            if (!currentUser?.isAdmin) {
+                alert('관리자만 접근할 수 있습니다.');
+                window.location.href = '../index.html';
+                return;
+            }
+
+            renderAllAdmin();
+
+            // Form submit handlers
+            document.getElementById('productForm').addEventListener('submit', (e) => {
+                e.preventDefault();
+                const products = Storage.getProducts();
+                products.push({
+                    id: Math.max(...products.map(p => p.id), 0) + 1,
+                    name: document.getElementById('productName').value,
+                    category: document.getElementById('productCategory').value,
+                    description: document.getElementById('productDescription').value,
+                    price: parseInt(document.getElementById('productPrice').value)
+                });
+                Storage.saveProducts(products);
+                document.getElementById('productForm').style.display = 'none';
+                document.getElementById('productForm').reset();
+                renderAdmin('products');
+            });
+
+            document.getElementById('modelForm').addEventListener('submit', (e) => {
+                e.preventDefault();
+                const models = Storage.getModels();
+                models.push({
+                    id: Math.max(...models.map(m => m.id), 0) + 1,
+                    name: document.getElementById('modelName').value,
+                    title: document.getElementById('modelTitle').value
+                });
+                Storage.saveModels(models);
+                document.getElementById('modelForm').style.display = 'none';
+                document.getElementById('modelForm').reset();
+                renderAdmin('models');
+            });
+        });
+
+        function switchAdmin(tab) {
+            document.querySelectorAll('.admin-section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.admin-nav-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(tab + 'Section').classList.add('active');
+            event.target.classList.add('active');
+            renderAdmin(tab);
+        }
+
+        function renderAllAdmin() {
+            renderAdmin('users');
+            renderAdmin('orders');
+            renderAdmin('products');
+            renderAdmin('models');
+        }
+
+        function renderAdmin(type) {
+            if (type === 'users') {
+                const users = Storage.getUsers();
+                const body = document.getElementById('usersBody');
+                body.innerHTML = users.map(user => `
+                    <tr>
+                        <td>${user.name}</td>
+                        <td>${user.communication}</td>
+                        <td>${new Date(user.createdAt).toLocaleDateString('ko-KR')}</td>
+                        <td><button class="btn-delete" onclick="deleteUser('${user.name}')">삭제</button></td>
+                    </tr>
+                `).join('');
+            } else if (type === 'orders') {
+                const orders = Storage.getOrders();
+                const body = document.getElementById('ordersBody');
+                body.innerHTML = orders.map(order => `
+                    <tr>
+                        <td>${order.userName}</td>
+                        <td>${order.product}</td>
+                        <td>${order.quantity}</td>
+                        <td>₩${order.totalPrice.toLocaleString()}</td>
+                        <td>${new Date(order.createdAt).toLocaleDateString('ko-KR')}</td>
+                        <td><button class="btn-delete" onclick="deleteOrder(${order.id})">삭제</button></td>
+                    </tr>
+                `).join('');
+            } else if (type === 'products') {
+                const products = Storage.getProducts();
+                const body = document.getElementById('productsBody');
+                body.innerHTML = products.map(product => `
+                    <tr>
+                        <td>${product.name}</td>
+                        <td>${product.category}</td>
+                        <td>${product.description}</td>
+                        <td>₩${product.price.toLocaleString()}</td>
+                        <td><button class="btn-delete" onclick="deleteProduct(${product.id})">삭제</button></td>
+                    </tr>
+                `).join('');
+            } else if (type === 'models') {
+                const models = Storage.getModels();
+                const body = document.getElementById('modelsBody');
+                body.innerHTML = models.map(model => `
+                    <tr>
+                        <td>${model.name}</td>
+                        <td>${model.title}</td>
+                        <td><button class="btn-delete" onclick="deleteModel(${model.id})">삭제</button></td>
+                    </tr>
+                `).join('');
+            }
+        }
+
+        function deleteUser(name) {
+            if (confirm('정말 삭제하시겠습니까?')) {
+                const users = Storage.getUsers();
+                Storage.saveUsers(users.filter(u => u.name !== name));
+                renderAdmin('users');
+            }
+        }
+
+        function deleteOrder(id) {
+            if (confirm('정말 삭제하시겠습니까?')) {
+                const orders = Storage.getOrders();
+                Storage.saveOrders(orders.filter(o => o.id !== id));
+                renderAdmin('orders');
+            }
+        }
+
+        function deleteProduct(id) {
+            if (confirm('정말 삭제하시겠습니까?')) {
+                const products = Storage.getProducts();
+                Storage.saveProducts(products.filter(p => p.id !== id));
+                renderAdmin('products');
+            }
+        }
+
+        function deleteModel(id) {
+            if (confirm('정말 삭제하시겠습니까?')) {
+                const models = Storage.getModels();
+                Storage.saveModels(models.filter(m => m.id !== id));
+                renderAdmin('models');
+            }
+        }
+
+        function showProductForm() {
+            document.getElementById('productForm').style.display = 'block';
+        }
+
+        function showModelForm() {
+            document.getElementById('modelForm').style.display = 'block';
+        }
+
+        function adminLogout() {
+            Storage.clearCurrentUser();
+            window.location.href = '../index.html';
+        }
+    </script>
+</body>
+</html>

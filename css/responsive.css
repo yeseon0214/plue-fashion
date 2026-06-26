@@ -1,0 +1,116 @@
+/* Tablet (768px 이하) */
+@media (max-width: 768px) {
+    .nav-menu {
+        display: none;
+    }
+
+    .header-content {
+        flex-wrap: wrap;
+    }
+
+    .section-title {
+        font-size: 36px;
+    }
+
+    .hero-title {
+        font-size: 48px;
+    }
+
+    .hero-subtitle {
+        font-size: 18px;
+    }
+
+    .products-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+
+    .models-grid,
+    .benefits-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .about-content {
+        font-size: 16px;
+    }
+
+    section {
+        padding: 60px 0;
+    }
+}
+
+/* Mobile (480px 이하) */
+@media (max-width: 480px) {
+    .logo {
+        font-size: 18px;
+    }
+
+    .auth-buttons {
+        width: 100%;
+        margin-top: 15px;
+        gap: 10px;
+    }
+
+    .btn-login, .btn-signup {
+        flex: 1;
+        padding: 10px 12px;
+        font-size: 12px;
+    }
+
+    .hero {
+        height: auto;
+        padding: 120px 20px 40px;
+    }
+
+    .hero-symbol {
+        font-size: 50px;
+        margin-bottom: 30px;
+    }
+
+    .hero-title {
+        font-size: 36px;
+        margin-bottom: 15px;
+    }
+
+    .hero-subtitle {
+        font-size: 16px;
+        margin-bottom: 20px;
+    }
+
+    .hero-tagline {
+        font-size: 14px;
+        margin-bottom: 40px;
+    }
+
+    .btn-shop {
+        padding: 12px 30px;
+        font-size: 12px;
+    }
+
+    .section-title {
+        font-size: 28px;
+        margin-bottom: 40px;
+    }
+
+    .products-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .product-image {
+        height: 200px;
+    }
+
+    .model-image {
+        height: 280px;
+    }
+
+    .modal-content {
+        margin: 20% auto;
+        padding: 30px 20px;
+    }
+
+    section {
+        padding: 40px 0;
+    }
+}

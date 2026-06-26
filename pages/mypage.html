@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MY PAGE - PLUE</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <style>
+        .mypage-container {
+            max-width: 800px;
+            margin: 120px auto 60px;
+            padding: 0 20px;
+        }
+        .mypage-section {
+            margin-bottom: 60px;
+        }
+        .mypage-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #000;
+        }
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 0;
+            border-bottom: 1px solid #ddd;
+        }
+        .info-label {
+            font-weight: 600;
+            width: 120px;
+        }
+        .order-item {
+            background-color: #f5f5f5;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+        }
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        .order-date {
+            font-size: 12px;
+            color: #999;
+        }
+        .no-data {
+            text-align: center;
+            padding: 40px;
+            color: #999;
+        }
+        .btn-back {
+            padding: 10px 30px;
+            border: 1px solid #000;
+            background-color: transparent;
+            cursor: pointer;
+            font-weight: 600;
+            margin-bottom: 30px;
+        }
+        .btn-back:hover {
+            background-color: #000;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">PLUE</div>
+                <div class="auth-buttons">
+                    <button class="btn-login" onclick="window.history.back()">돌아가기</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="mypage-container">
+        <div id="mypageContent">
+            <!-- 동적으로 생성됨 -->
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <h3>PLUE</h3>
+                <p>PLUS UNIQUE</p>
+                <p class="copyright">© 2026 PLUE. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/storage.js"></script>
+    <script src="../js/auth.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const currentUser = Storage.getCurrentUser();
+            if (!currentUser) {
+                alert('로그인이 필요합니다.');
+                window.location.href = '../index.html';
+                return;
+            }
+
+            const content = document.getElementById('mypageContent');
+            const orders = Storage.getOrders().filter(o => o.userName === currentUser.name);
+
+            content.innerHTML = `
+                <h1 style="font-size: 36px; margin-bottom: 40px;">마이페이지</h1>
+
+                <div class="mypage-section">
+                    <h2 class="mypage-title">내 정보</h2>
+                    <div class="info-item">
+                        <span class="info-label">이름</span>
+                        <span>${currentUser.name}</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">소통망</span>
+                        <span>${currentUser.communication || '-'}</span>
+                    </div>
+                </div>
+
+                <div class="mypage-section">
+                    <h2 class="mypage-title">내 주문 내역</h2>
+                    ${orders.length > 0 ? `
+                        ${orders.map(order => `
+                            <div class="order-item">
+                                <div class="order-header">
+                                    <span><strong>${order.product}</strong> x ${order.quantity}</span>
+                                    <span class="order-date">${new Date(order.createdAt).toLocaleDateString('ko-KR')}</span>
+                                </div>
+                                <div>
+                                    <p style="margin-bottom: 5px;">연락처: ${order.phone}</p>
+                                    <p style="font-weight: 600; color: #000;">₩${order.totalPrice.toLocaleString()}</p>
+                                </div>
+                            </div>
+                        `).join('')}
+                    ` : '<div class="no-data">주문 내역이 없습니다.</div>'}
+                </div>
+            `;
+        });
+    </script>
+</body>
+</html>
