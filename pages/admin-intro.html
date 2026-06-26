@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Access - PLUE</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <style>
+        .admin-intro-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 60px;
+            min-height: 100vh;
+            padding-top: 80px;
+            padding-bottom: 60px;
+        }
+        .admin-intro-section {
+            background-color: #f5f5f5;
+            padding: 50px 40px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 1px solid #ddd;
+        }
+        .admin-intro-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        .admin-intro-section h2 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        .admin-intro-section p {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 25px;
+        }
+        .admin-intro-btn {
+            padding: 12px 40px;
+            background-color: #000;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+        .admin-intro-btn:hover {
+            opacity: 0.8;
+        }
+        .admin-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .admin-header h1 {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+        .admin-header p {
+            font-size: 16px;
+            color: #999;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">PLUE ADMIN</div>
+                <div class="auth-buttons">
+                    <button class="btn-login" onclick="adminLogout()">로그아웃</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="admin-intro-container">
+        <div class="admin-header">
+            <h1>관리자 패널</h1>
+            <p>PLUE의 관리 시스템에 접근하세요</p>
+        </div>
+
+        <div class="admin-intro-section" onclick="goToPage('../index.html')">
+            <h2>🌟 PLUE 사이트</h2>
+            <p>PLUE 공식 브랜드 홈페이지로 이동합니다.</p>
+            <button class="admin-intro-btn">사이트 방문하기</button>
+        </div>
+
+        <div class="admin-intro-section" onclick="goToPage('admin.html')">
+            <h2>⚙️ 관리자 대시보드</h2>
+            <p>회원, 주문, 제품, 모델을 관리할 수 있습니다.</p>
+            <button class="admin-intro-btn">대시보드 진입하기</button>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <h3>PLUE</h3>
+                <p>PLUS UNIQUE</p>
+                <p class="copyright">© 2026 PLUE. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/storage.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const currentUser = Storage.getCurrentUser();
+            if (!currentUser?.isAdmin) {
+                alert('관리자만 접근할 수 있습니다.');
+                window.location.href = '../index.html';
+                return;
+            }
+        });
+
+        function goToPage(url) {
+            window.location.href = url;
+        }
+
+        function adminLogout() {
+            Storage.clearCurrentUser();
+            window.location.href = '../index.html';
+        }
+    </script>
+</body>
+</html>

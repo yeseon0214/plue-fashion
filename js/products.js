@@ -15,7 +15,6 @@ const Products = {
                 </div>
                 <h3 class="product-name">${product.name}</h3>
                 <p class="product-description">${product.description}</p>
-                <p style="font-size: 16px; font-weight: 600; margin: 15px 0;">₩${product.price.toLocaleString()}</p>
                 <button class="btn-details">View Details</button>
             `;
             grid.appendChild(card);
@@ -32,7 +31,7 @@ const Products = {
         products.forEach(product => {
             const option = document.createElement('option');
             option.value = product.id;
-            option.textContent = `${product.name} - ₩${product.price.toLocaleString()}`;
+            option.textContent = `${product.name}`;
             select.appendChild(option);
         });
     }

@@ -31,7 +31,7 @@ const Auth = {
         // 관리자 로그인
         if (name === Auth.admin.name && password === Auth.admin.password) {
             Storage.setCurrentUser({ name, isAdmin: true });
-            window.location.href = 'pages/admin.html';
+            window.location.href = 'pages/admin-intro.html';
             return true;
         }
 
