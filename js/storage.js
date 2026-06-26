@@ -33,12 +33,12 @@ const Storage = {
 
 function getDefaultProducts() {
     return [
-        { id: 1, name: 'Premium Sneaker', category: 'Shoes', description: 'Minimalist premium sneaker', price: 180000 },
-        { id: 2, name: 'Classic White Shoe', category: 'Shoes', description: 'Elegant white leather shoe', price: 220000 },
-        { id: 3, name: 'Modern T-Shirt', category: 'Clothing', description: 'Premium cotton t-shirt', price: 45000 },
-        { id: 4, name: 'Essential Hoodie', category: 'Clothing', description: 'Comfortable premium hoodie', price: 95000 },
-        { id: 5, name: 'Baseball Cap', category: 'Caps', description: 'Minimalist baseball cap', price: 35000 },
-        { id: 6, name: 'Bucket Hat', category: 'Caps', description: 'Premium bucket hat', price: 50000 }
+        { id: 1, name: 'Premium Sneaker', category: 'Shoes', description: 'Minimalist premium sneaker' },
+        { id: 2, name: 'Classic White Shoe', category: 'Shoes', description: 'Elegant white leather shoe' },
+        { id: 3, name: 'Modern T-Shirt', category: 'Clothing', description: 'Premium cotton t-shirt' },
+        { id: 4, name: 'Essential Hoodie', category: 'Clothing', description: 'Comfortable premium hoodie' },
+        { id: 5, name: 'Baseball Cap', category: 'Caps', description: 'Minimalist baseball cap' },
+        { id: 6, name: 'Bucket Hat', category: 'Caps', description: 'Premium bucket hat' }
     ];
 }
 

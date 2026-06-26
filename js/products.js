@@ -68,7 +68,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     phone,
                     product: product.name,
                     quantity,
-                    totalPrice: product.price * quantity,
                     createdAt: new Date().toISOString()
                 });
                 Storage.saveOrders(orders);
